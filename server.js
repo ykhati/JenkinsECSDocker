@@ -4,8 +4,20 @@ var ecs = new AWS.ECS({
   region: 'us-east-1'}
   );
 
+var params = {
+ };
+
+var clusterName = '';
+
+ecs.listClusters(params, function(err, clusterName) {
+   if (err) console.log(err, err.stack); // an error occurred
+   else     console.log(clusterName); 
+
+})
+debugger
+
 var paramsDescribeCluster = {
-  clusters: ["getting-started"]
+  clusters: clusterName.clusterArns
 };
 
 // Describe ECS Cluster
@@ -15,8 +27,10 @@ ecs.describeClusters(paramsDescribeCluster, function(err, data) {
 });
 
 
+var stringClusterName = clusterName.clusterArns.toString()
+
 var paramsListContInstances = {
-  cluster: "getting-started"
+  cluster: stringClusterName
 }
 
 //List container instance and get instance ID and describe that container
