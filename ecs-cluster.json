@@ -4,8 +4,7 @@
   "Mappings": {
     "VpcCidrs": {
       "vpc": {"cidr" : "10.0.0.0/16"},
-      "pubsubnet1": {"cidr" : "10.0.0.0/24"},
-      "pubsubnet2": {"cidr" :"10.0.1.0/24"}
+      "pubsubnet1": {"cidr" : "10.0.0.0/24"}
     },
     "AWSRegionToAMI" : {
       "us-east-1"      : { "AMIID" : "ami-40286957" },
@@ -206,42 +205,6 @@
             {
               "Fn::Select": [
                 "0",
-                {
-                  "Fn::GetAZs": {
-                    "Ref": "AWS::Region"
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "PubSubnetAz2": {
-      "Condition": "CreateVpcResources",
-      "Type": "AWS::EC2::Subnet",
-      "Properties": {
-        "VpcId": {
-          "Ref": "Vpc"
-        },
-        "CidrBlock": {
-          "Fn::FindInMap": ["VpcCidrs", "pubsubnet2", "cidr"]
-        },
-        "MapPublicIpOnLaunch": "true",
-        "AvailabilityZone": {
-          "Fn::If": [
-            "UseSpecifiedVpcAvailabilityZones",
-            {
-              "Fn::Select": [
-                "1",
-                {
-                  "Ref": "VpcAvailabilityZones"
-                }
-              ]
-            },
-            {
-              "Fn::Select": [
-                "1",
                 {
                   "Fn::GetAZs": {
                     "Ref": "AWS::Region"
@@ -478,9 +441,6 @@
                   [
                     {
                       "Ref": "PubSubnetAz1"
-                    },
-                    {
-                      "Ref": "PubSubnetAz2"
                     }
                   ]
                 ]
@@ -545,20 +505,10 @@
       "Value": {"Ref":"PubSubnetAz1"},
       "Export": { "Name" : {"Fn::Sub": "${AWS::StackName}-SubnetA"}}
     },
-    "SubnetB": {
-      "Description": "The ID of subnet B",
-      "Value": {"Ref":"PubSubnetAz2"},
-      "Export": { "Name" : {"Fn::Sub":"${AWS::StackName}-SubnetB"}}
-    },
     "AvailabilityZone1": {
       "Description": "AZ 1",
       "Value": {"Fn::GetAtt":["PubSubnetAz1","AvailabilityZone"]},
       "Export": { "Name" : {"Fn::Sub": "${AWS::StackName}-AZ1"}}
-    },
-    "AvailabilityZone2": {
-      "Description": "AZ 2",
-      "Value": {"Fn::GetAtt":["PubSubnetAz2","AvailabilityZone"]},
-      "Export": { "Name" : {"Fn::Sub": "${AWS::StackName}-AZ2"}}
     }
   }
 }
