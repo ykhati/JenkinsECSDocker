@@ -267,18 +267,6 @@
         }
       }
     },
-    "PubSubnet2RouteTableAssociation": {
-      "Condition": "CreateVpcResources",
-      "Type": "AWS::EC2::SubnetRouteTableAssociation",
-      "Properties": {
-        "SubnetId": {
-          "Ref": "PubSubnetAz2"
-        },
-        "RouteTableId": {
-          "Ref": "RouteViaIgw"
-        }
-      }
-    },
     "EcsClusterResource": {
       "Type": "AWS::ECS::Cluster",
       "Properties": {
