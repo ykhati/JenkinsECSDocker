@@ -12,7 +12,7 @@
                     "containerPort": 8081,
                     "hostPort": 8081
                 }
-            ]
+            ],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
