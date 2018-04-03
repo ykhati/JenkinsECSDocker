@@ -19,7 +19,7 @@
                 "options": {
                     "awslogs-group": "awslogs-ecs",
                     "awslogs-region": "us-east-1",
-                    "awslogs-stream-prefix": "awslogs-logging"
+                    "awslogs-stream-prefix": "log-gigya-auth"
                 }
             }
         }
