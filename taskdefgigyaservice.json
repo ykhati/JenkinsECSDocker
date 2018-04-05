@@ -4,7 +4,7 @@
     "containerDefinitions": [
         {
             "image": "149324216444.dkr.ecr.us-east-1.amazonaws.com/gigyaservice-test-repo",
-            "name": "jenkins-task-gigyaservice",
+            "name": "jenkins-task-container",
             "cpu": 10,
             "memory": 256,
             "essential": true,
