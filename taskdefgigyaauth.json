@@ -1,5 +1,5 @@
 {
-    "family": "jenkins-task-gigyaauth",
+    "family": "task-gigyaauth",
     "networkMode" : "host",
     "containerDefinitions": [
         {
