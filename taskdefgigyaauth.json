@@ -1,5 +1,5 @@
 {
-    "family": "task-gigyaauth",
+    "family": "task-gigya-auth",
     "networkMode" : "host",
     "containerDefinitions": [
         {
@@ -17,7 +17,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "awslogs-ecs",
+                    "awslogs-group": "/aws/ecs/gigya",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "log-gigya-auth"
                 }
