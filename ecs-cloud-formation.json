@@ -1,10 +1,6 @@
 {
   "AWSTemplateFormatVersion":"2010-09-09",
   "Parameters":{
-    "KeyName":{
-      "Type":"AWS::EC2::KeyPair::KeyName",
-      "Description":"Name of an existing EC2 KeyPair to enable SSH access to the ECS instances."
-    },
     "VPC": {
       "Description" : "VPC ID to create the instance in",
       "Type": "String",
@@ -164,9 +160,6 @@
         ],
         "InstanceType":{
           "Ref":"InstanceType"
-        },
-        "KeyName":{
-          "Ref":"KeyName"
         },
         "UserData": {
           "Fn::Base64": {
