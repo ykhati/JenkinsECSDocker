@@ -9,7 +9,7 @@
       "AllowedPattern" : "vpc-[\\x20-\\x7E]*",
       "ConstraintDescription" : "Must be valid VPC identifier (vpc-xxxxxx)"
     },
-    "Subnets": {
+    "Subnet": {
       "Description" : "Subnet ID to create the instance in",
       "Type": "String",
       "MinLength": "1",
@@ -140,7 +140,7 @@
     "ContainerInstance":{
       "Type":"AWS::EC2::Instance",
       "Properties":{
-        "SubnetId" : {“Fn::Join” : [ “,”, { “Ref” : “Subnets”} ] },
+        "SubnetId" : { "Ref" : "Subnet" },
         "ImageId":{
           "Fn::FindInMap":[
             "AWSRegionToAMI",
