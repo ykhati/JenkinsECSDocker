@@ -12,13 +12,13 @@ Parameters:
     AllowedPattern: vpc-[\x20-\x7E]*
     ConstraintDescription: Must be valid VPC identifier (vpc-xxxxxx)
 
-  Subnet:
-    Description: Subnet ID to create the instance in
+  SubnetOne:
+    Description: Subnet ID One to create the instance in
     Type: String
-    MinLength: '1'
-    MaxLength: '255'
-    AllowedPattern: subnet-[\x20-\x7E]*
-    ConstraintDescription: Must be valid AWS subnet identifier (subnet-xxxxxx)
+
+  SubnetTwo:
+    Description: Subnet ID Two to create the instance in
+    Type: String
 
   EcsCluster:
     Type: String
