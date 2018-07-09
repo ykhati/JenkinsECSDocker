@@ -25,6 +25,14 @@ Parameters:
     Description: ECS Cluster Name
     Default: ''
 
+  PublicLoadBalancer:
+    Type: String
+    Default: "arn:aws:elasticloadbalancing:us-west-2:149324216444:loadbalancer/app/fargate-alb/21d0d90f8207d6eb"
+
+  PublicLoadBalancerListener:
+    Type: String
+    Default: "arn:aws:elasticloadbalancing:us-west-2:149324216444:listener/app/fargate-alb/21d0d90f8207d6eb/39f3c3c5b461c74f"
+
 
 Resources:
   ECSCluster:
@@ -32,6 +40,7 @@ Resources:
     Properties:
       ClusterName:
         Ref: EcsCluster
+
 
   # This is an IAM role which authorizes ECS to manage resources on your
   # account on your behalf, such as updating your load balancer with the
@@ -100,22 +109,6 @@ Resources:
                 - 'logs:PutLogEvents'
               Resource: '*'
 
-    # A dummy target group is used to setup the ALB to just drop traffic
-    # initially, before any real service target groups have been added.
-  DummyTargetGroupPublic:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      HealthCheckIntervalSeconds: 6
-      HealthCheckPath: /
-      HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
-      Name: !Join ['-', [!Ref 'AWS::StackName', 'drop-1']]
-      Port: 80
-      Protocol: HTTP
-      UnhealthyThresholdCount: 2
-      VpcId: !Ref 'VPC'
-      
 
 # These are the values output by the CloudFormation template. Be careful
 # about changing any of them, because of them are exported with specific
@@ -136,3 +129,8 @@ Outputs:
     Value: !GetAtt 'ECSTaskExecutionRole.Arn'
     Export:
       Name: !Join [ ':', [ !Ref 'AWS::StackName', 'ECSTaskExecutionRole' ] ]
+  PublicListener:
+    Description: The ARN of the public load balancer's Listener
+    Value: !Ref PublicLoadBalancerListener
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'PublicListener' ] ]
