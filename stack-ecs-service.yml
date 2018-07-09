@@ -67,9 +67,6 @@ Parameters:
   Region:
     Type: String
 
-  TargetGroup:
-    Type: String
-
 
 Conditions:
   HasCustomRole: !Not [ !Equals [!Ref 'Role', ''] ]
